@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-title>
+      Como Jogar?
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu side="start" menuId="first" contentId="main">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>
+        Menu Principal
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item href="/home">
+        <ion-icon name="game-controller"></ion-icon>
+         Jogar
+      </ion-item>
+      <ion-item href="/como-jogar">
+        <ion-icon name="information-circle"></ion-icon>
+         Como Jogar?
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<h1 id="title">Regras Principais</h1>
+<p id="lista_regras"><b>1 - </b>O objetivo do jogo é derrotar a mão <br>do dealer, sem ultrapassar o valor 21.<br><br>
+  <b>2 - </b> São atribuidas inicialmente duas<br> cartas ao jogador e ao dealer.<br><br>
+  <b>3 - </b> Cartas do 2 ao 10, independentemente<br> do naipe, valem o seu número de face.<br> Valete, Rei e Rainha valem todos 10,<br> e Ases valem 1 ou 11(Fica o que favorecer<br> melhor a mão do jogador).<br><br>
+  <b>4 - </b> Pressione "Hit" para pedir outra carta<br> (Não há limite desde que a soma não passe<br> de 21) e "Stand" para avançar com a mão.<br><br>
+  <b>5 - </b> Se o jogador der Bust (>21) o Dealer<br> ganha automaticamente.
+</p>
+<img id="blackj" src="./assets/bj.png" alt="">
+<ion-router-outlet id="main"></ion-router-outlet>

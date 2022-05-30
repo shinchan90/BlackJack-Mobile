@@ -11,6 +11,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'como-jogar',
+    loadChildren: () => import('./como-jogar/como-jogar.module').then( m => m.ComoJogarPageModule)
+  },
+
 ];
 
 @NgModule({
