@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'como-jogar',
     loadChildren: () => import('./como-jogar/como-jogar.module').then( m => m.ComoJogarPageModule)
   },
+  {
+    path: 'jogar',
+    loadChildren: () => import('./jogar/jogar.module').then( m => m.JogarPageModule)
+  },
 
 ];
 

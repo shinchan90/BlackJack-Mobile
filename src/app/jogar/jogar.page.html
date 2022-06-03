@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Jogar</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-menu side="start" menuId="first" contentId="main">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>
+        Menu Principal
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item href="/home">
+        <ion-icon name="game-controller"></ion-icon>
+         Jogar
+      </ion-item>
+      <ion-item href="/como-jogar">
+        <ion-icon name="information-circle"></ion-icon>
+         Como Jogar?
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-content>
+  <p *ngIf="start">Dealer tem: {{ dealerStatus }}</p>
+  <p *ngIf="start">Pontuação: {{ scDealer }}</p>
+  <p *ngIf="start">Voce tem: {{ playerStatus }}</p>
+  <p *ngIf="start">Pontuação: {{ scPlayer }}</p>
+  <ion-button id="hit" *ngIf="start" (click)="hit()">Hit</ion-button>
+  <ion-button id="stay" *ngIf="start" (click)="stay()">Stay</ion-button>
+  <ion-button (click)="startGame()" id="jogar_novo" *ngIf="gameOver">Jogar de Novo</ion-button>
+  <p id="win" *ngIf="gameOver">{{ win }}</p>
+  <ion-button id="menuprin" href="/home">Voltar</ion-button>
+</ion-content>
