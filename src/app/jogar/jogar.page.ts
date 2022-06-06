@@ -141,7 +141,7 @@ export class JogarPage implements OnInit {
 
     this.scoreDealer = this.pontuacao(this.cartasDealer);
     this.scorePlayer = this.pontuacao(this.cartasPlayer);
-    this.dealerStatus = ' '+ this.stringDealer +'\n';
+    this.dealerStatus = ' '+ this.stringDealer +'\n\n';
     this.scDealer = '' + this.scoreDealer;
     this.playerStatus = ' '+ this.stringPlayer +'\n';
     this.scPlayer = ' ' + this.scorePlayer;

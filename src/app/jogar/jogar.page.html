@@ -3,15 +3,15 @@
     <ion-title>Jogar</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <p *ngIf="start">Dealer tem: {{ dealerStatus }}</p>
-  <p *ngIf="start">Pontuação: {{ scDealer }}</p>
-  <p *ngIf="start">Voce tem: {{ playerStatus }}</p>
-  <p *ngIf="start">Pontuação: {{ scPlayer }}</p>
-  <ion-button id="hit" *ngIf="start" (click)="hit()">Hit</ion-button>
-  <ion-button id="stay" *ngIf="start" (click)="stay()">Stay</ion-button>
-  <ion-button (click)="startGame()" id="jogar_novo" *ngIf="gameOver">Jogar de Novo</ion-button>
-  <p id="win" *ngIf="gameOver">{{ win }}</p>
-  <ion-button id="menuprin" href="/home">Voltar</ion-button>
+  <p class="info"><b>Dealer tem: </b><br>{{ dealerStatus }}</p>
+  <p class="info"><b>Pontuação: </b>{{ scDealer }}</p>
+  <p class="info"><b>Voce tem: </b><br>{{ playerStatus }}</p>
+  <p class="info"><b>Pontuação: </b>{{ scPlayer }}</p>
+  <ion-button class="botao" id="hit" expand="round" color="tertiary" *ngIf="start" (click)="hit()">Hit</ion-button>
+  <ion-button class="botao" id="stay" expand="round" color="tertiary" *ngIf="start" (click)="stay()">Stay</ion-button>
+  <p id="win" *ngIf="gameOver"><b>{{ win }}</b></p>
+  <img *ngIf="gameOver" id="trophy" src="./assets/trophy.png" alt="">
+  <ion-button (click)="startGame()" expand="round" id="jogar_novo" color="tertiary" *ngIf="gameOver">Jogar de Novo</ion-button>
+  <ion-button routerDirection="back" expand="round" color="tertiary" id="voltar" href="/home">Voltar</ion-button>
 </ion-content>
