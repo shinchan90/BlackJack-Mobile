@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/prefer-for-of */
 import { Component, OnInit } from '@angular/core';
+import { ControlContainer } from '@angular/forms';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { IonImg } from '@ionic/angular';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-jogar',
@@ -7,16 +11,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jogar.page.scss'],
 })
 export class JogarPage implements OnInit {
-  naipes = ['Copas', 'Ouros', 'Espadas', 'Paus'];
-  numeros = ['Dois', 'Tres', 'Quatro', 'Cinco', 'Seis', 'Sete', 'Oito', 'Nove', 'Valete', 'Rainha', 'Rei', 'Ás' ];
+  naipes = ['copas', 'ouros', 'espadas', 'paus'];
+  numeros = ['dois', 'tres', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'valete', 'rainha', 'rei', 'as' ];
   valor = 0;
   score = 0;
   scoreDealer = 0;
   scorePlayer = 0;
+  elementosDealer = ['dealer1', 'dealer2', 'dealer3', 'dealer4', 'dealer5', 'dealer6'];
   criarDeck = [];
-  cartasDealer =[];
-  cartasPlayer =[];
+  cartasDealer = [];
+  cartasPlayer = [];
   cartasDeck = [];
+  result = [];
+  imagesDealer = [];
   stringDealer = '';
   stringPlayer = '';
   dealerStatus = '';
@@ -24,13 +31,15 @@ export class JogarPage implements OnInit {
   playerStatus = '';
   scPlayer = '';
   win = '';
+  element;
   empate = false;
   dealerWin = false;
   playerWin = false;
   gameOver = false;
   start = false;
+  cardImg = '';
 
-
+  container = document.getElementById('dealer');
   constructor() { }
 
   ionViewDidEnter() {
@@ -67,30 +76,30 @@ export class JogarPage implements OnInit {
 
   stringCartas(carta: { numero: string; naipe: string })
   {
-    return ' \n'+ carta.numero + ' de ' + carta.naipe;
+    return carta.numero + '-' + carta.naipe;
   }
 
   valoresCartas(carta: { numero: string })
   {
     switch(carta.numero)
     {
-      case 'Dois':
+      case 'dois':
           return 2;
-      case 'Tres':
+      case 'tres':
           return 3;
-      case 'Quatro':
+      case 'quatro':
           return 4;
-      case 'Cinco':
+      case 'cinco':
           return 5;
-      case 'Seis':
+      case 'seis':
           return 6;
-      case 'Sete':
+      case 'sete':
           return 7;
-      case 'Oito':
+      case 'oito':
           return 8;
-      case 'Nove':
+      case 'nove':
           return 9;
-      case 'Ás':
+      case 'as':
           return 1;
       default:
           return 10;
@@ -106,7 +115,7 @@ export class JogarPage implements OnInit {
       const lista = i;
       this.score += this.valoresCartas(lista);
 
-      if(lista.numero === 'Ás')
+      if(lista.numero === 'as')
       {
         as = true;
       }
@@ -126,17 +135,29 @@ export class JogarPage implements OnInit {
     this.stringPlayer = '';
   }
 
+  showCards()
+  {
+    this.cardImg = '/assets/cards/' + this.stringDealer + '.png';
+  }
   mostrar()
   {
     this.clear();
-
     this.cartasDealer.forEach(i => {
-        this.stringDealer += this.stringCartas(i);
-    });
+      this.stringDealer = '';
+      this.stringDealer = this.stringCartas(i);
 
+    });
+    this.imagesDealer.push('/assets/cards/' + this.stringDealer + '.png');
+    this.stringDealer = '';
+    console.log(this.imagesDealer);
+     if(this.gameOver === true)
+     {
+        this.imagesDealer = [''];
+     }
 
     this.cartasPlayer.forEach(i => {
         this.stringPlayer += this.stringCartas(i);
+        //this.cardImg = '/assets/cards/' + this.cartasPlayer(i) + '.png';
     });
 
     this.scoreDealer = this.pontuacao(this.cartasDealer);
@@ -145,6 +166,7 @@ export class JogarPage implements OnInit {
     this.scDealer = '' + this.scoreDealer;
     this.playerStatus = ' '+ this.stringPlayer +'\n';
     this.scPlayer = ' ' + this.scorePlayer;
+
   }
 
   startGame()
@@ -203,6 +225,7 @@ stay()
 
 terminoJogo()
 {
+  this.imagesDealer = [];
   this.gameOver = true;
   this.start = false;
   this.scoreDealer = this.pontuacao(this.cartasDealer);

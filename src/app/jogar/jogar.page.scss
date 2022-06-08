@@ -1,5 +1,6 @@
 *{
   font-family:sans-serif;
+  color: #fff;
   white-space: pre-line;
 }
 
@@ -41,4 +42,17 @@
   width: 80px;
   left: 240px;
   bottom: 275px;
+}
+
+#dealer{
+  height: auto;
+  width: 100px;
+  margin: 10px;
+  position: relative;
+  bottom: 210px;
+  left: 260px;
+
+}
+ion-content {
+  --background:url("/assets/table3.png");
 }
