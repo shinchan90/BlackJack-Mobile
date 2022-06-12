@@ -15,16 +15,23 @@
   --padding-start: 20px;
   --padding-end: 20px;
     position: relative;
-    left: 10px;
+    left: 120px;
+    top: 250px;
     margin: 5px;
 }
 
-#voltar{
-  position: fixed;
-  top: 600px;
-  left: 280px;
+#score_dealer
+{
+  position: relative;
+  top:220px;
+  left: 145px;
 }
 
+#score_player{
+  position: relative;
+  top: 232px;
+  left: 145px;
+}
 #win{
   position: relative;
   left: 220px;
@@ -36,22 +43,33 @@
   bottom: 100px;
   left: -70px;
 }
-#trophy{
-  position:relative;
-  height: auto;
-  width: 80px;
-  left: 240px;
-  bottom: 275px;
-}
 
 #dealer{
   height: auto;
-  width: 100px;
-  margin: 10px;
+  width: 90px;
+  margin: -30px;
   position: relative;
-  bottom: 210px;
-  left: 260px;
+  top: 20px;
+  left: 160px;
 
+}
+
+#player{
+  height: auto;
+  width: 90px;
+  margin: -30px;
+  position: relative;
+  top: 190px;
+  left: 160px;
+  align-self: center;
+}
+
+#back{
+  height: auto;
+  width: 90px;
+  position: absolute;
+  bottom: -37px;
+  left: 170px;
 }
 ion-content {
   --background:url("/assets/table3.png");

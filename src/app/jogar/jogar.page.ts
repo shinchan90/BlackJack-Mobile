@@ -17,13 +17,13 @@ export class JogarPage implements OnInit {
   score = 0;
   scoreDealer = 0;
   scorePlayer = 0;
-  elementosDealer = ['dealer1', 'dealer2', 'dealer3', 'dealer4', 'dealer5', 'dealer6'];
   criarDeck = [];
   cartasDealer = [];
   cartasPlayer = [];
   cartasDeck = [];
   result = [];
   imagesDealer = [];
+  imagesPlayer = [];
   stringDealer = '';
   stringPlayer = '';
   dealerStatus = '';
@@ -31,24 +31,37 @@ export class JogarPage implements OnInit {
   playerStatus = '';
   scPlayer = '';
   win = '';
-  element;
   empate = false;
   dealerWin = false;
   playerWin = false;
-  gameOver = false;
+  gameOver = true;
   start = false;
+  cardsGiven = false;
+  back = true;
+  maxcards = true;
   cardImg = '';
 
-  container = document.getElementById('dealer');
   constructor() { }
 
   ionViewDidEnter() {
+    this.gameOver = true;
+    this.cardsGiven = false;
+    this.back = true;
+    this.maxcards = true;
+    if(this.gameOver === true)
+    {
+       this.imagesDealer.length = 0;
+       this.imagesPlayer.length = 0;
+    }
+
     this.startGame();
   }
   ngOnInit() {
+
   }
 
   deck() {
+
     this.cartasDeck = [];
     for (let i = 0; i < this.naipes.length; i++)
     {
@@ -137,34 +150,44 @@ export class JogarPage implements OnInit {
 
   showCards()
   {
-    this.cardImg = '/assets/cards/' + this.stringDealer + '.png';
+    this.imagesPlayer.push('/assets/cards/' + this.stringPlayer + '.png');
   }
   mostrar()
   {
     this.clear();
+
     this.cartasDealer.forEach(i => {
       this.stringDealer = '';
       this.stringDealer = this.stringCartas(i);
-
     });
+
     this.imagesDealer.push('/assets/cards/' + this.stringDealer + '.png');
     this.stringDealer = '';
-    console.log(this.imagesDealer);
-     if(this.gameOver === true)
-     {
-        this.imagesDealer = [''];
-     }
 
-    this.cartasPlayer.forEach(i => {
-        this.stringPlayer += this.stringCartas(i);
-        //this.cardImg = '/assets/cards/' + this.cartasPlayer(i) + '.png';
+
+    if(this.cardsGiven === false){
+      this.cartasPlayer.forEach(i => {
+        this.stringPlayer = '';
+        this.stringPlayer = this.stringCartas(i);
+        this.showCards();
+        this.cardsGiven = true;
     });
+    }
+    this.imagesPlayer = [];
 
+    if(this.cardsGiven === true)
+    {
+      this.cartasPlayer.forEach(i => {
+        this.stringPlayer = '';
+        this.stringPlayer = this.stringCartas(i);
+        this.showCards();
+      });
+    }
+
+    this.stringPlayer = '';
     this.scoreDealer = this.pontuacao(this.cartasDealer);
     this.scorePlayer = this.pontuacao(this.cartasPlayer);
-    this.dealerStatus = ' '+ this.stringDealer +'\n\n';
     this.scDealer = '' + this.scoreDealer;
-    this.playerStatus = ' '+ this.stringPlayer +'\n';
     this.scPlayer = ' ' + this.scorePlayer;
 
   }
@@ -172,15 +195,15 @@ export class JogarPage implements OnInit {
   startGame()
 {
   this.start = true;
+  this.maxcards = true;
   this.gameOver = false;
   this.dealerWin = false;
   this.playerWin = false;
+  this.back = true;
   this.criarDeck = this.deck();
   this.randomizeDeck(this.criarDeck);
   this.cartasDealer = [this.criarDeck.shift()];
   this.cartasPlayer = [this.criarDeck.shift(), this.criarDeck.shift()];
-  console.log(this.cartasDealer);
-  console.log(this.cartasPlayer);
   this.mostrar();
 
   this.dealerWin = false;
@@ -191,43 +214,51 @@ export class JogarPage implements OnInit {
 
 hitDealer()
 {
-  if((this.scoreDealer<17))
-  {
-
-    this.cartasDealer.push(this.criarDeck.shift());
-
-  }
+  this.cartasDealer.push(this.criarDeck.shift());
 }
 
 hit()
 {
-  this.hitDealer();
+  this.back = false;
   this.cartasPlayer.push(this.criarDeck.shift());
   this.mostrar();
   if(this.scoreDealer>21 || this.scorePlayer>21)
   {
     this.terminoJogo();
   }
-  console.log(this.cartasDealer);
-  console.log(this.cartasPlayer);
+
 }
 
 stay()
 {
-  this.hitDealer();
+  this.back = false;
+  console.log(this.maxcards);
+  do{
+    this.hitDealer();
+    this.mostrar();
+  }
+  while(this.scoreDealer<17);
+
   if(this.scoreDealer>21 || this.scorePlayer>21)
   {
     this.terminoJogo();
   }
+
   this.terminoJogo();
-  this.mostrar();
 }
 
 terminoJogo()
 {
-  this.imagesDealer = [];
+  this.mostrar();
   this.gameOver = true;
   this.start = false;
+  this.cardsGiven = false;
+  this.maxcards = true;
+  if(this.gameOver === true)
+  {
+     this.imagesDealer.length = 0;
+     this.imagesPlayer.length = 0;
+  }
   this.scoreDealer = this.pontuacao(this.cartasDealer);
   this.scorePlayer = this.pontuacao(this.cartasPlayer);
   if((this.scoreDealer <= 21 && this.scoreDealer> this.scorePlayer) ||
