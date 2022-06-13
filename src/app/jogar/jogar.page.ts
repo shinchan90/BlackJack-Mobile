@@ -194,6 +194,7 @@ export class JogarPage implements OnInit {
 
   startGame()
 {
+  this.reset();
   this.start = true;
   this.maxcards = true;
   this.gameOver = false;
@@ -226,7 +227,6 @@ hit()
   {
     this.terminoJogo();
   }
-
 }
 
 stay()
@@ -245,8 +245,16 @@ stay()
   }
 
   this.terminoJogo();
+
 }
 
+reset()
+{
+  if(this.gameOver === true){
+    this.imagesDealer.length = 0;
+    this.imagesPlayer.length = 0;
+  }
+}
 terminoJogo()
 {
   this.mostrar();
@@ -254,11 +262,6 @@ terminoJogo()
   this.start = false;
   this.cardsGiven = false;
   this.maxcards = true;
-  if(this.gameOver === true)
-  {
-     this.imagesDealer.length = 0;
-     this.imagesPlayer.length = 0;
-  }
   this.scoreDealer = this.pontuacao(this.cartasDealer);
   this.scorePlayer = this.pontuacao(this.cartasPlayer);
   if((this.scoreDealer <= 21 && this.scoreDealer> this.scorePlayer) ||
