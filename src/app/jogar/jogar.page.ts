@@ -5,6 +5,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { IonImg } from '@ionic/angular';
 import { TouchSequence } from 'selenium-webdriver';
 
+
 @Component({
   selector: 'app-jogar',
   templateUrl: './jogar.page.html',
